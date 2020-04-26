@@ -10,6 +10,7 @@ import (
 var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Lists all of your tasks.",
+	Long: "\"list\" command lists all of your tasks.\n\nUsage:\n  todo list",
 	Run: func(cmd *cobra.Command, args []string) {
 		tasks, err := db.AllTasks()
 		if err != nil {
@@ -22,7 +23,7 @@ var listCmd = &cobra.Command{
 		}
 		fmt.Println("You have the following tasks:")
 		for i, task := range tasks {
-			fmt.Println("%d. %s\n", i+1, task.Value)
+			fmt.Printf("%d. %s\n", i+1, task.Value)
 		}
 	},
 }
