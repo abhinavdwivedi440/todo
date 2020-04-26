@@ -10,7 +10,7 @@ var taskBucket = []byte("tasks")
 var db *bolt.DB
 
 type Task struct {
-	Key int
+	Key   int
 	Value string
 }
 
@@ -21,7 +21,7 @@ func Init(dbPath string) error {
 		return err
 	}
 	return db.Update(func(tx *bolt.Tx) error {
-		_,err := tx.CreateBucketIfNotExists(taskBucket)
+		_, err := tx.CreateBucketIfNotExists(taskBucket)
 		return err
 	})
 }
@@ -46,7 +46,7 @@ func AllTasks() ([]Task, error) {
 	err := db.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket(taskBucket)
 		c := b.Cursor()
-		for k,v := c.First(); k != nil; k,v = c.Next() {
+		for k, v := c.First(); k != nil; k, v = c.Next() {
 			tasks = append(tasks, Task{
 				Key:   btoi(k),
 				Value: string(v),
@@ -67,7 +67,7 @@ func DeleteTask(key int) error {
 	})
 }
 
-func itob(v int) []byte{
+func itob(v int) []byte {
 	b := make([]byte, 8)
 	binary.BigEndian.PutUint64(b, uint64(v))
 	return b

@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
+
 	"github.com/abhinavdwivedi440/todo/cmd"
 	"github.com/abhinavdwivedi440/todo/db"
 	"github.com/mitchellh/go-homedir"
-	"os"
-	"path/filepath"
 )
+
 func main() {
 	home, _ := homedir.Dir()
 	dbPath := filepath.Join(home, ".tasks.db")
